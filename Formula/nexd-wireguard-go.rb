@@ -1,8 +1,8 @@
 require "formula"
 
-class NexdWiregaurdGo < Formula
+class NexdWireguardGo < Formula
 
-  desc "Nexodus Friendly Wiregaurd Go"
+  desc "Nexodus Friendly Wireguard Go"
   homepage "https://nexodus.io/"
   license "Apache-2.0"
   head "https://github.com/nexodus-io/wireguard-go.git", branch: "main"
@@ -15,12 +15,12 @@ class NexdWiregaurdGo < Formula
 
   def install
     ENV["CGO_ENABLED"] = "0"
-    system "go", "build", "-ldflags=-X main.Version=#{version}", "-o", "nexd-wiregaurd-go", "."
-    bin.install "nexd-wiregaurd-go"
+    system "go", "build", "-ldflags=-X main.Version=#{version}", "-o", "nexd-wireguard-go", "."
+    bin.install "nexd-wireguard-go"
   end
 
   test do
-    system "#{bin}/nexd-wiregaurd-go", "version"
+    system "#{bin}/nexd-wireguard-go", "version"
   end
 
 end
