@@ -8,7 +8,7 @@ class NexdWiregaurdGo < Formula
   head "https://github.com/nexodus-io/wireguard-go.git", branch: "main"
 
   version "0.0.20230420"
-  url "https://github.com/nexodus-io/nexodus/archive/refs/tags/#{version}.tar.gz"
+  url "https://github.com/nexodus-io/wireguard-go/archive/refs/tags/#{version}.tar.gz"
   sha256 "2f8e546f92f85917c275bf04e01ad7f2db19e14cfe7c156c5861540570ac797d"
 
   depends_on "go@1.20" => :build

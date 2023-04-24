@@ -14,7 +14,7 @@ class Nexodus < Formula
   # sha256 `curl -L -s https://github.com/nexodus-io/nexodus/some_checksums.txt`.split(' ').first
 
   depends_on "go@1.20" => :build
-  depends_on "nexd-wiregaurd-go@0.0.20230420" => :recommended
+  depends_on "nexd-wiregaurd-go" => :recommended
 
   def install
     ENV["CGO_ENABLED"] = "0"
