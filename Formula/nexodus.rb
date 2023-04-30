@@ -1,4 +1,5 @@
 require "formula"
+require 'date'
 
 class Nexodus < Formula
 
@@ -7,11 +8,33 @@ class Nexodus < Formula
   license "Apache-2.0"
   head "https://github.com/nexodus-io/nexodus.git", branch: "main"
 
-  version "prod"
-  url "https://github.com/nexodus-io/nexodus/archive/refs/tags/#{version}.tar.gz"
+  def self.curl_github_api(url)
+    curl = "curl -L -s -H 'X-GitHub-Api-Version: 2022-11-28' -H 'Accept: application/vnd.github+json'"
+    if ENV['HOMEBREW_GITHUB_API_TOKEN']
+      curl += " -H 'Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}'"
+    end
+    resp = JSON.parse(`#{curl} #{url}`)
+    # puts JSON.pretty_generate(resp) 
+    resp
+  end
 
-  # TODO: post a checksum of the source tar ball somehere so we don't need update this for each release.
-  # sha256 `curl -L -s https://github.com/nexodus-io/nexodus/some_checksums.txt`.split(' ').first
+  def self.fetch_sha_and_date(tag) 
+
+    resp = curl_github_api "https://api.github.com/repos/nexodus-io/nexodus/git/refs/tags/#{tag}"
+    sha = resp["object"]["sha"]
+
+    resp = curl_github_api resp["object"]["url"]
+    date = Date.parse(resp["committer"]["date"]).strftime("%Y%m%d")    
+
+    return sha, date
+  end
+
+  def self.init 
+     sha, date = fetch_sha_and_date("prod")
+     version "0.1.#{date}git#{sha}"
+     url "https://github.com/nexodus-io/nexodus/archive/#{sha}.tar.gz"   
+  end
+  init
 
   depends_on "go@1.20" => :build
   depends_on "wireguard-tools" => :recommended
