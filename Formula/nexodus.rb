@@ -25,6 +25,15 @@ class Nexodus < Formula
     bin.install "dist/nexctl"
   end
 
+  service do
+    run [opt_bin/"nexd", "https://try.nexodus.io"]
+    require_root true
+    keep_alive true
+    log_path var/"log/nexd-stdout.log"
+    error_log_path var/"log/nexd-stderr.log"
+    environment_variables PATH: std_service_path_env
+  end
+
   test do
     system "#{bin}/nexctl", "version"
   end
