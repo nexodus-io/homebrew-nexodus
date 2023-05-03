@@ -14,8 +14,9 @@ class AbstractNexodus < Formula
     url "https://github.com/nexodus-io/nexodus/archive/#{sha}.tar.gz"   
 
     depends_on "go@1.20" => :build
-    depends_on "nexd-wireguard-go" => :recommended
-    depends_on "wireguard-tools" => :recommended
+    if OS.mac?
+      depends_on "nexd-wireguard-go" => :recommended
+    end
   
     service do
       run [opt_bin/"nexd", "https://try.nexodus.io"]
