@@ -11,7 +11,7 @@ class NexdWireguardGo < Formula
   url "https://github.com/nexodus-io/wireguard-go/archive/refs/tags/#{version}.tar.gz"
   sha256 "2f8e546f92f85917c275bf04e01ad7f2db19e14cfe7c156c5861540570ac797d"
 
-  depends_on "go@1.20" => :build
+  depends_on "go@1.22" => :build
 
   def install
     ENV["CGO_ENABLED"] = "0"
