@@ -13,7 +13,7 @@ class AbstractNexodus < Formula
     version "#{ver}.#{tag}-#{date}-#{sha}"
     url "https://github.com/nexodus-io/nexodus/archive/#{sha}.tar.gz"   
 
-    depends_on "go@1.21" => :build
+    depends_on "go@1.22" => :build
     if OS.mac?
       depends_on "nexd-wireguard-go" => :recommended
     end
